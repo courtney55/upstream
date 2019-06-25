@@ -6,9 +6,13 @@ class Instructor::SectionsController < ApplicationController
     @section = Section.new
   end
 
-  def create
-    @section = @course.sections.create(section_params)
-    redirect_to instructor_course_path(@course)
+  def create 
+    @section = current_course.sections.create(section_params)
+    if @section.valid?
+      redirect_to instructor_course_path(@section) 
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
@@ -29,3 +33,4 @@ class Instructor::SectionsController < ApplicationController
     params.require(:section).permit(:title)
   end
 end
+ 
