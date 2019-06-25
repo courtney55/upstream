@@ -11,8 +11,8 @@
     <br />
     <div class="row">
       <div class="col-sm-8 col-12">
-        <% if course.image_url %>
-          <%= image_tag course.image_url, class: 'img-fluid' %>
+        <% if @course %>
+          <%= image_tag course.image.url, class: 'img-fluid' %>
         <% end %>
       </div>
       <div class="col-sm-8 col-12">
