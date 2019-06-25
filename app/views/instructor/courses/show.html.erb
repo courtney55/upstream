@@ -10,8 +10,19 @@
         });
       }
     });
+
+    $('.sections').sortable({
+      update: function( event, ui ) {
+        $.ajax({
+          type: 'PUT',
+          url: ui.item.data('update-url'),
+          dataType: 'json',
+          data: { section: { row_order_position: ui.item.index() } }
+        });
+      }
+    });
   });
-</script>
+</script> 
 
 <br />
 <div class="booyah-box col-10 offset-1">
@@ -24,14 +35,23 @@
   <br class="clr" />
 
   <div class="text-center">
-    <%= link_to 'Add a new section...', new_instructor_course_section_path(current_course), class: 'btn btn-primary btn-lg' %>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#newSectionModal">
+          Add a New Section...
+      </button>   
   </div>
 
-  <ul>
-    <% current_course.sections.each do |section| %>
-      <li>
+  <ul class="sections">
+    <% current_course.sections.rank(:row_order).each do |section| %>
+      <li data-update-url="<%= instructor_section_path(section) %>" class="section-li">
         <%= section.title %>
-        <%= link_to 'New Lesson', new_instructor_section_lesson_path(section), class: 'float-right btn btn-primary btn-sm' %>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-md float-right new-lesson-button" data-toggle="modal" data-target="#newLessonModal" data-lesson-url="<%= instructor_section_lessons_path(section) %>">
+            Add a New Lesson...
+        </button>
+       
+        <br class="clear" />
         <ul class="lessons">
           <% section.lessons.rank(:row_order).each do |lesson| %>
             <li data-update-url="<%= instructor_lesson_path(lesson) %>">
