@@ -33,13 +33,13 @@
 <div class="booyah-box col-10 offset-1">
   <h1 class="text-center"><%= current_course.title %></h1>
   <% if current_course.image.url %>
-    <%= image_tag current_course.image.url, class: 'img-fluid' %>
+    <%= image_tag current_course.image.url, class: 'img-thumbnail' %>
   <% end %>
   <br />
+  <br />
   <%= link_to 'Preview As Student...', course_path(current_course), class: 'btn btn-warning float-right' %>
-  <br class="clr" />
 
-  <div class="text-center">
+  <div class="text-align: right">
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#newSectionModal">
           Add a New Section...
