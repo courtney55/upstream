@@ -17,3 +17,5 @@ Tools used
 -Devise
 -Carrierwave
 -Stripe
+
+<img width="1115" alt="upstream index page" src="https://user-images.githubusercontent.com/49853567/80623098-b6901c00-8a17-11ea-98f8-9c7fe4844eb0.png">
